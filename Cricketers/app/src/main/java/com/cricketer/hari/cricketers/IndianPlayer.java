@@ -1,12 +1,16 @@
 package com.cricketer.hari.cricketers;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class IndianPlayer extends Activity {
@@ -15,12 +19,28 @@ public class IndianPlayer extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indian_player);
-        ListView IndianCricketers= (ListView)findViewById(R.id.indiancaptainsView);
-        String[] IndianPlayers= new String[] {"DHONI","SAURAV GANGULY","KAPIL DEV","SUNIL GAVASKAR","4","5","6","7"};
+        final ListView IndianCricketers= (ListView)findViewById(R.id.indiancaptainsView);
+        String[] IndianPlayers= new String[] {"DHONI","SAURAV GANGULY","KAPIL DEV","SUNIL GAVASKAR","SURESH RAINA","5","6","7"};
         ArrayAdapter<String> IndianPlayersAdapter=new ArrayAdapter<String>(this,R.layout.indianlist,IndianPlayers);
         IndianCricketers.setAdapter(IndianPlayersAdapter);
         int a=IndianCricketers.getCount();
         Log.d("The value of a is ",""+a);
+        // listening to single list item on click
+        IndianCricketers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                // selected item
+                String product = ((TextView) view).getText().toString();
+
+                // Launching new Activity on selecting single List Item
+                Intent i = new Intent(getApplicationContext(), Dhoni.class);
+                // sending data to new activity
+                i.putExtra("product", product);
+                startActivity(i);
+
+            }
+        });
     }
 
 
