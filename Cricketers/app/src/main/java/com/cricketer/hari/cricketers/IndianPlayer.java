@@ -11,6 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.sql.Array;
+import java.util.Arrays;
 
 
 public class IndianPlayer extends Activity {
@@ -19,26 +23,16 @@ public class IndianPlayer extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indian_player);
+        final Class playersClass[]={Dhoni.class,Saurav.class};
         final ListView IndianCricketers= (ListView)findViewById(R.id.indiancaptainsView);
-        String[] IndianPlayers= new String[] {"DHONI","SAURAV GANGULY","KAPIL DEV","SUNIL GAVASKAR","SURESH RAINA","5","6","7"};
+        final String[] IndianPlayers= new String[] {"DHONI","SAURAV GANGULY","KAPIL DEV","SUNIL GAVASKAR","SURESH RAINA","5","6","7"};
         ArrayAdapter<String> IndianPlayersAdapter=new ArrayAdapter<String>(this,R.layout.indianlist,IndianPlayers);
         IndianCricketers.setAdapter(IndianPlayersAdapter);
-        int a=IndianCricketers.getCount();
-        Log.d("The value of a is ",""+a);
-        // listening to single list item on click
         IndianCricketers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-                // selected item
-                String product = ((TextView) view).getText().toString();
-
-                // Launching new Activity on selecting single List Item
-                Intent i = new Intent(getApplicationContext(), Dhoni.class);
-                // sending data to new activity
-                i.putExtra("product", product);
+                Intent i = new Intent(getApplicationContext(),playersClass[position]);
                 startActivity(i);
-
             }
         });
     }

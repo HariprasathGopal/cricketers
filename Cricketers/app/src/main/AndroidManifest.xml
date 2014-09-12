@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Saurav" />
         <activity android:name=".Dhoni" />
+        <activity android:name=".dhoni_biodata" />
     </application>
 
 </manifest>
